@@ -1,5 +1,6 @@
 SELECT 
 CustomerID
+,gender
 ,SeniorCitizen
 ,Partner
 ,Dependents
