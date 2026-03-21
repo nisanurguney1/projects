@@ -1,6 +1,10 @@
 SELECT 
 CustomerID
-,SeniorCitizen
+,gender
+,CASE
+WHEN SeniorCitizen = 0 THEN FALSE
+ ELSE TRUE
+  END AS SeniorCitizen
 ,Partner
 ,Dependents
 ,tenure
@@ -27,6 +31,6 @@ CustomerID
  WHEN MonthlyCharges > 79 THEN 'expensive'
   ELSE 'mid'
    END AS monthly_charges_status
-,TotalCharges
+,SAFE_CAST(NULLIF(TRIM(TotalCharges), '') AS FLOAT64) AS TotalCharges
 ,Churn
 from {{ ref('stg_telco_churn') }}
